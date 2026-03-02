@@ -55,7 +55,6 @@
   .section-divider{height:1px;background:var(--border);max-width:1280px;margin:0 auto}
   .no-results{grid-column:1/-1;text-align:center;padding:40px;color:var(--text-light);font-size:14px;font-weight:300}
 
-  /* MODAL */
   .modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:40px;backdrop-filter:blur(4px)}
   .modal-overlay.open{display:flex}
   .modal{background:var(--white);border-radius:14px;width:100%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.2);overflow:hidden}
@@ -72,7 +71,6 @@
   .doc-preview p{color:#444;margin-bottom:10px;font-weight:400}
   .doc-preview .doc-logo{text-align:center;margin-bottom:16px;font-weight:700;font-size:13px;color:var(--accent);letter-spacing:2px}
 
-  /* PDF EMBED */
   .pdf-container{width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#525659}
   .pdf-container iframe{width:100%;height:70vh;border:none;display:block}
   .pdf-error{display:none;text-align:center;padding:40px 20px;background:var(--bg);border-radius:8px;border:1px solid var(--border)}
@@ -81,19 +79,16 @@
   .pdf-error .btn-download{display:inline-block;padding:10px 24px;border-radius:7px;background:var(--accent);color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.5px;transition:background .2s}
   .pdf-error .btn-download:hover{background:var(--accent-hover)}
 
-  /* PAGINATED DOC */
   .page-nav{display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 0 0;border-top:1px solid var(--border);margin-top:20px}
   .page-btn{padding:7px 18px;border-radius:6px;border:1px solid var(--border);background:var(--white);color:var(--text-mid);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s}
   .page-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
   .page-btn:disabled{opacity:.35;cursor:default}
   .page-info{font-size:11px;color:var(--text-light);font-weight:500}
 
-  /* TABLE STYLES */
   .doc-preview table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}
   .doc-preview th{background:#edf2f7;padding:8px 10px;text-align:left;font-weight:600;border:1px solid #ddd;font-size:11px;color:var(--navy)}
   .doc-preview td{padding:8px 10px;border:1px solid #ddd;vertical-align:top;line-height:1.6}
 
-  /* VIDEO EMBED */
   .video-container{background:#000;border-radius:8px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative}
   .video-container iframe{width:100%;height:100%;border:none}
   .video-container video{width:100%;height:100%;object-fit:contain;background:#000}
@@ -119,7 +114,6 @@
   footer{text-align:center;padding:24px 40px;border-top:1px solid var(--border);background:var(--white);font-size:10px;color:var(--text-light);letter-spacing:1px}
   footer a{color:var(--accent);text-decoration:none}
 
-  /* COPY PROTECTION */
   .doc-preview{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 
   @media(max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -219,7 +213,6 @@
 </div>
 <footer>© KSI CONSULTING. DALLAS, TX. ALL RIGHTS RESERVED. &nbsp;|&nbsp; <a href="https://www.ksiconsults.com" target="_blank">KSICONSULTS.COM</a></footer>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header"><h2 id="modal-title"></h2><button class="modal-close" id="modal-close">&times;</button></div>
@@ -230,13 +223,10 @@
 
 <script>
 // ==========================================================
-//  CONFIGURATION — Update this base URL to your GitHub Pages
-//  repo URL once your files are uploaded.
-//  Example: 'https://youruser.github.io/ksi-resources'
+//  CONFIGURATION — Your GitHub Pages base URL
 // ==========================================================
 const BASE_URL = 'https://jmurrayksi.github.io/ksi-reource-center';
 
-// Helper to build full file paths
 const pdfUrl  = (filename) => `${BASE_URL}/docs/${filename}`;
 const videoUrl = (filename) => `${BASE_URL}/videos/${filename}`;
 
@@ -304,7 +294,6 @@ function buildVideoEmbed(item) {
       </div>
       <p style="margin-top:16px">${item.desc}</p>`;
   }
-  // Fallback placeholder for videos without a source
   return `
     <div class="modal-tag">${item.tag} &nbsp;•&nbsp; ${item.duration || 'Video'}</div>
     <div class="video-container">
@@ -318,59 +307,47 @@ function buildVideoEmbed(item) {
 // ========== DATA ==========
 const methodData = [
   {id:'m1',cat:'overview',tag:'Overview',title:'Transformation Methodology Overview',desc:'Our proven end-to-end methodology for delivering successful transformations.',
-    embedPdf: pdfUrl('transformation-methodology-overview.pdf'),
+    embedPdf: pdfUrl('enabling-workday-transformation.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — METHODOLOGY</div><h4>Transformation Methodology Overview</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Five Core Phases:</strong></p><p><strong>1. Assess & Discover</strong> — Evaluate current state, identify gaps, stakeholder interviews, process mapping.</p><p><strong>2. Strategy & Design</strong> — Future-state vision, operating model, technology roadmap, success metrics.</p><p><strong>3. Plan & Prepare</strong> — Project plans, governance, communications, change management roadmaps.</p><p><strong>4. Execute & Deliver</strong> — Disciplined program management, testing, training, go-live readiness.</p><p><strong>5. Optimize & Sustain</strong> — Hypercare, adoption measurement, process refinement, value realization.</p></div>`},
   {id:'m2',cat:'strategy',tag:'Strategy',title:'Transformation Strategy Framework',desc:'Aligning technology, process, and organizational change with business goals.',
-    embedPdf: pdfUrl('transformation-strategy-framework.pdf'),
+    embedPdf: pdfUrl('ocm-strategy-and-delivery.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — STRATEGY</div><h4>Transformation Strategy Framework</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>🎯 Business Alignment</strong> — Anchored to measurable business outcomes.</p><p><strong>⚙️ Operating Model</strong> — Service delivery, COEs, shared services redesign.</p><p><strong>💻 Technology Roadmap</strong> — Vendor-agnostic, independent evaluation.</p><p><strong>👥 Change Readiness</strong> — Integrated from day one.</p></div>`},
   {id:'m3',cat:'strategy',tag:'Strategy',title:'Vendor Evaluation Strategy',desc:'Independent approach to evaluating and selecting best-fit technology partners.',
-    embedPdf: pdfUrl('vendor-evaluation-strategy.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — STRATEGY</div><h4>Vendor Evaluation Strategy</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Step 1:</strong> Requirements Definition — prioritized by business impact.</p><p><strong>Step 2:</strong> Market Scan & Shortlist — 3–4 best-suited vendors.</p><p><strong>Step 3:</strong> Structured Demonstrations — scenario-based, real-world.</p><p><strong>Step 4:</strong> Scoring & Analysis — weighted model across key dimensions.</p><p><strong>Step 5:</strong> Negotiation Support — 15–25% average savings.</p></div>`},
   {id:'m4',cat:'plans',tag:'Plans',title:'Program Implementation Plan',desc:'Phased implementation plan with milestones and deliverables.',
-    embedPdf: pdfUrl('program-implementation-plan.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — PLANS</div><h4>Program Implementation Plan</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Phase 1: Initiate (Wk 1–4)</strong> — Charter, governance, kickoff.</p><p><strong>Phase 2: Design (Wk 5–20)</strong> — Workshops, configuration, integrations.</p><p><strong>Phase 3: Test (Wk 21–36)</strong> — SIT, UAT, migration, training.</p><p><strong>Phase 4: Deploy (Wk 37–48)</strong> — Go-live, hypercare, optimization.</p></div>`},
   {id:'m5',cat:'plans',tag:'Plans',title:'Change Management & Comms Plan',desc:'Managing organizational change, engagement, and communications.',
-    embedPdf: pdfUrl('change-management-comms-plan.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — PLANS</div><h4>Change Management & Communications Plan</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>🔍 Stakeholder Analysis</strong> — Impact, influence, and readiness mapping.</p><p><strong>📢 Communications</strong> — Exec messages, newsletters, campaigns, manager toolkits.</p><p><strong>🤝 Champion Network</strong> — 40–60 champions with briefings and recognition.</p><p><strong>📊 Adoption Metrics</strong> — Login rates, training completion, help desk volumes.</p></div>`},
   {id:'m6',cat:'dashboards',tag:'Dashboards',title:'Executive Program Dashboard',desc:'Real-time program health, milestones, risks, and decisions.',
-    embedPdf: pdfUrl('executive-program-dashboard.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — DASHBOARD</div><h4>Executive Program Dashboard</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p style="text-align:center"><strong>Program: 🟢 &nbsp;|&nbsp; Budget: 🟢 &nbsp;|&nbsp; Timeline: 🟡</strong></p><p>✅ Kickoff ✅ Design ✅ Config 🔄 UAT (78%) ⬜ Training ⬜ Go-Live</p><p>UAT: 245/312 | Defects: 2 | Training: 83.6% | Readiness: 4.1/5.0</p></div>`},
   {id:'m7',cat:'dashboards',tag:'Dashboards',title:'Change Adoption Dashboard',desc:'Training completion, communications reach, and employee sentiment.',
-    embedPdf: pdfUrl('change-adoption-dashboard.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — DASHBOARD</div><h4>Change Adoption Dashboard</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p style="text-align:center"><strong>Adoption Health: 🟢 Strong</strong></p><p>eLearning: 88% | Manager ILT: 76% | HR Admin: 100% ✅</p><p>Email open: 72% | Intranet: 3,420 views | Town hall: 68%</p><p>Sentiment — Understand: 4.2 | Prepared: 3.8 | Help: 4.4</p></div>`}
 ];
 
 const commsData = [
   {id:'c1',cat:'employees',tag:'Employees',title:'Transformation Kickoff Announcement',desc:'Company-wide announcement introducing the HR transformation initiative.',
-    embedPdf: pdfUrl('comms-transformation-kickoff.pdf'),
+    embedPdf: pdfUrl('hr-as-change-agent.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Transformation Kickoff Announcement</h4><p><strong>To:</strong> All Employees &nbsp;|&nbsp; <strong>From:</strong> CHRO</p><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>Dear Team,</p><p>I'm excited to share that we are embarking on a significant initiative to modernize our HR systems and processes.</p><p><strong>What's Changing:</strong> A new HCM platform streamlining onboarding, benefits, time tracking, and performance management.</p><p><strong>Why This Matters:</strong> More intuitive, integrated tools aligned with how we work today.</p><p><strong>What to Expect:</strong> We've partnered with KSI Consulting to guide us. More details coming soon.</p></div>`},
   {id:'c2',cat:'employees',tag:'Employees',title:'Go-Live Readiness Email',desc:'Pre-launch checklist for employees.',
-    embedPdf: pdfUrl('comms-go-live-readiness.pdf'),
+    embedPdf: pdfUrl('workday-intro-for-leaders.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Go-Live Readiness Checklist</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>☑ Complete Training by [Date]<br>☑ Verify Personal Info<br>☑ Save Important Documents<br>☑ Bookmark the New Portal</p></div>`},
   {id:'c3',cat:'employees',tag:'Employees',title:'Post Go-Live Support Guide',desc:'Support resources available after launch.',
-    embedPdf: pdfUrl('comms-post-go-live-support.pdf'),
+    embedPdf: pdfUrl('hr-talking-points.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Post Go-Live Support</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>🖥 Self-Service resources, video tutorials, FAQ<br>📞 Hypercare Weeks 1–4: Extended hours 7AM–7PM<br>📧 Ongoing: HR Help Desk Mon–Fri 8AM–5PM</p></div>`},
   {id:'c4',cat:'managers',tag:'Managers',title:'Manager Change Champion Toolkit',desc:'Resource kit for managers to drive team adoption.',
-    embedPdf: pdfUrl('comms-manager-champion-toolkit.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Manager Change Champion Toolkit</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Responsibilities:</strong> Attend briefings, share updates, encourage training, gather feedback.</p><p><strong>Talking Points:</strong> Training available, simpler time-off, go-live on track, multi-channel support.</p></div>`},
   {id:'c5',cat:'managers',tag:'Managers',title:'Manager Pre-Go-Live Actions',desc:'Specific actions required from managers before launch.',
-    embedPdf: pdfUrl('comms-manager-pre-go-live.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Manager Pre-Go-Live Actions</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>☑ Complete manager training<br>☑ Verify team roster<br>☑ Set up approval delegation<br>☑ Communicate with team<br>☑ Minimize meetings go-live week</p></div>`},
   {id:'c6',cat:'hr',tag:'HR',title:'HR Team Readiness Checklist',desc:'HR team preparation for cutover and post-launch support.',
-    embedPdf: pdfUrl('comms-hr-readiness-checklist.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>HR Team Readiness</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Training:</strong> Complete admin modules, pass certification 85%+<br><strong>Data:</strong> Validate migration, confirm configs, test security<br><strong>Support:</strong> Review hypercare schedule, escalation process</p></div>`},
   {id:'c7',cat:'hr',tag:'HR',title:'HR Process Transition Guide',desc:'How daily HR processes change in the new system.',
-    embedPdf: pdfUrl('comms-hr-process-transition.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>HR Process Transition</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Onboarding:</strong> Paper → digital workflow<br><strong>Data Changes:</strong> Manual → employee self-service<br><strong>Reporting:</strong> Excel pulls → real-time dashboards<br><strong>Benefits:</strong> Paper enrollment → online with auto-eligibility</p></div>`},
   {id:'c8',cat:'leadership',tag:'Leadership',title:'Steering Committee Status Update',desc:'Executive-level project status report.',
-    embedPdf: pdfUrl('comms-steering-committee-status.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Steering Committee Status</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Status: 🟢 On Track</strong></p><p>UAT 94% pass rate. Change management ramping for go-live.</p><p><strong>Decision Needed:</strong> Approve production cutover.</p></div>`},
   {id:'c9',cat:'leadership',tag:'Leadership',title:'Business Case Executive Summary',desc:'Business case for leadership investment approval.',
-    embedPdf: pdfUrl('comms-business-case-summary.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Business Case</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Benefits (3-Year):</strong> $2.4M gains, 40% processing reduction, 90%+ self-service</p><p><strong>Investment:</strong> $1.8M + $420K/yr &nbsp;|&nbsp; <strong>Payback:</strong> 22 months</p></div>`}
 ];
 
-// ===== TRAINING: Hire an Associate (paginated) =====
 const hireAssocPages = [
   `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">OVERVIEW</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p>This guide provides an overview of the steps involved in hiring an employee. This includes two scenarios:</p><p>• <strong>Section A:</strong> Hire through Recruiting Process<br>• <strong>Section B:</strong> Ad-hoc Hires</p><p>The Hire step in the recruiting process is redirected to HRSS once Recruiting Coordinators have indicated that the candidate successfully cleared the background check and are marked "Ready for Hire".</p><p>The Ad-hoc Hire process will be used for international hires until Phase 2 in the summer of 2023 when the Workday Recruiting module goes live for International. In North America, this process will be used for the exceptional cases where the hiring is done outside the recruiting process.</p><p>An open position must be created prior to the ad-hoc hire.</p><p style="margin-top:16px"><strong>Editing Form Fields</strong></p><p>• The <strong>Prompt icon</strong> inside a field lets you choose a value from the available options. You can also start typing the value and press enter to view related search results.<br>• A <strong>red asterisk</strong> next to a field indicates the field is Mandatory and must be filled to submit a form.</p>`,
   `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION A: HIRE THROUGH RECRUITING PROCESS</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p><strong>Step 1: Initiating the Task</strong></p><p>Click the <strong>Inbox</strong> icon at the top-right corner of the Home page and locate the task title <em>Hire: [Candidate Name] – [Position]</em>. Click on the task to view the Revise Employee Hire task details.</p><p>Most of the information will be populated from the job requisition. Cross check the details to ensure completeness and accuracy.</p><p>Prior to completing this task, check again for duplicate records in Workday and in external information files from legacy systems. Update prehire information such as legal name.</p><p style="margin-top:12px"><strong>Complete the Additional Information section:</strong></p><table><tr><th style="width:30%">Field</th><th>Key Considerations</th></tr><tr><td><strong>Business Title</strong></td><td>Edit if the Business Title needs to be different from the Job Title.</td></tr><tr><td><strong>Additional Job Classifications</strong></td><td>Select applicable type if part of Sales organization OR appropriate EEO category for US reporting.</td></tr><tr><td><strong>Company Insider Types</strong></td><td>Will default from Job Profile and should not be changed.</td></tr><tr><td><strong>Workers' Comp Code Override</strong></td><td>Defaults from Job Profile — don't edit; issues corrected by HRIS at job profile level.</td></tr></table>`,
@@ -383,22 +360,20 @@ const hireAssocPages = [
 
 const trainingData = [
   {id:'t1',cat:'hr',tag:'HR',title:'Hire an Associate — Workday Process Guide',desc:'Complete guide for hiring employees through the Recruiting process and Ad-hoc hires in Workday.',
-    embedPdf: pdfUrl('training-hire-associate.pdf'),
+    embedPdf: pdfUrl('employee-basic-navigation.pdf'),
     pages: hireAssocPages},
   {id:'t2',cat:'employees',tag:'Employees',title:'Self-Service Quick Start Guide',desc:'Step-by-step guide to navigate the new self-service portal.',
-    embedPdf: pdfUrl('training-self-service-quickstart.pdf'),
+    embedPdf: pdfUrl('workday-position-management.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Employee Self-Service — Quick Start</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>1. Log In</strong> — SSO at [URL] with MFA setup.<br><strong>2. Personal Info</strong> — My Profile → Personal Details.<br><strong>3. Time Off</strong> — Time & Absence → Request Time Off.<br><strong>4. Pay Stubs</strong> — Pay → Pay Statements.<br><strong>5. Benefits</strong> — Benefits → Enroll during Open Enrollment.</p></div>`},
   {id:'t3',cat:'employees',tag:'Employees',title:'Mobile App Training Guide',desc:'Using the mobile app for self-service on the go.',
-    embedPdf: pdfUrl('training-mobile-app-guide.pdf'),
+    embedPdf: pdfUrl('absence-training-course.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Mobile App Guide</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>Download → Enter tenant URL → Sign in → Enable biometrics.</p><p>✅ Time-off ✅ Clock in/out ✅ Pay stubs ✅ Directory ✅ Benefits</p></div>`},
   {id:'t4',cat:'managers',tag:'Managers',title:'Manager Approval Workflows',desc:'Approval workflows for time-off, expenses, and requisitions.',
-    embedPdf: pdfUrl('training-manager-approval-workflows.pdf'),
+    embedPdf: pdfUrl('article-additional-job-classification-hr.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Manager Approval Workflows</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Time-Off:</strong> Review + Approve/Send Back<br><strong>Expenses:</strong> Verify receipts and policy limits<br><strong>Requisitions:</strong> Review justification → auto-routes</p><p>Set up delegation under My Account → Delegations.</p></div>`},
   {id:'t5',cat:'managers',tag:'Managers',title:'People Analytics Dashboard',desc:'Workforce analytics dashboards for data-driven decisions.',
-    embedPdf: pdfUrl('training-people-analytics.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>People Analytics Dashboard</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>📊 Headcount &nbsp; 📈 Turnover &nbsp; ⏱ Absence &nbsp; 🎯 Performance</p><p>Filter by department, location, level, time. Export to Excel/PDF.</p></div>`},
   {id:'t6',cat:'leadership',tag:'Leadership',title:'Executive Sponsor Briefing Guide',desc:'Executive sponsor role and engagement expectations.',
-    embedPdf: pdfUrl('training-executive-sponsor-briefing.pdf'),
     content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Executive Sponsor Briefing</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>Active sponsorship is the #1 predictor of successful change.</p><p>Champion vision, attend steering committee, remove barriers, communicate, model adoption.</p></div>`}
 ];
 
@@ -406,19 +381,13 @@ const videosData = [
   {id:'v1',cat:'instructions',tag:'Instructions',title:'Create a Job Requisition',desc:'Video walkthrough demonstrating how to create a job requisition in the system.',duration:'Video',
     videoSrc: videoUrl('create-job-requisition.mp4')},
   {id:'v2',cat:'concepts',tag:'Concepts',title:'What is HR Transformation?',desc:'Overview of HR transformation and how it drives business value.',duration:'5:12',
-    videoSrc: videoUrl('what-is-hr-transformation.mp4')},
-  {id:'v3',cat:'concepts',tag:'Concepts',title:'Understanding Change Management',desc:'Key change management concepts and organizational readiness.',duration:'4:45',
-    videoSrc: videoUrl('understanding-change-management.mp4')},
-  {id:'v4',cat:'instructions',tag:'Instructions',title:'How to Submit a Time-Off Request',desc:'Step-by-step instructions for requesting time off.',duration:'2:30',
-    videoSrc: videoUrl('submit-time-off-request.mp4')},
-  {id:'v5',cat:'demonstrations',tag:'Demonstrations',title:'Employee Self-Service Portal Demo',desc:'Live demo of the self-service portal features.',duration:'6:48',
-    videoSrc: videoUrl('self-service-portal-demo.mp4')},
-  {id:'v6',cat:'demonstrations',tag:'Demonstrations',title:'People Analytics Dashboard Demo',desc:'Analytics dashboard with real-time workforce metrics.',duration:'5:30',
-    videoSrc: videoUrl('people-analytics-demo.mp4')},
-  {id:'v7',cat:'announcements',tag:'Announcements',title:'Our Transformation Journey Begins',desc:'Leadership message announcing the initiative.',duration:'4:10',
-    videoSrc: videoUrl('transformation-journey-begins.mp4')},
-  {id:'v8',cat:'announcements',tag:'Announcements',title:'Go-Live Celebration & Thank You',desc:'Leadership celebrates successful launch.',duration:'3:22',
-    videoSrc: videoUrl('go-live-celebration.mp4')}
+    videoSrc: videoUrl('explainer-change-impact-sessions.mp4')},
+  {id:'v3',cat:'concepts',tag:'Concepts',title:'Understanding Change Management',desc:'Key change management concepts and organizational readiness.',duration:'4:45'},
+  {id:'v4',cat:'instructions',tag:'Instructions',title:'How to Submit a Time-Off Request',desc:'Step-by-step instructions for requesting time off.',duration:'2:30'},
+  {id:'v5',cat:'demonstrations',tag:'Demonstrations',title:'Employee Self-Service Portal Demo',desc:'Live demo of the self-service portal features.',duration:'6:48'},
+  {id:'v6',cat:'demonstrations',tag:'Demonstrations',title:'People Analytics Dashboard Demo',desc:'Analytics dashboard with real-time workforce metrics.',duration:'5:30'},
+  {id:'v7',cat:'announcements',tag:'Announcements',title:'Our Transformation Journey Begins',desc:'Leadership message announcing the initiative.',duration:'4:10'},
+  {id:'v8',cat:'announcements',tag:'Announcements',title:'Go-Live Celebration & Thank You',desc:'Leadership celebrates successful launch.',duration:'3:22'}
 ];
 
 // ========== RENDER ==========
@@ -464,7 +433,6 @@ function openModal(item, type) {
 
   if (type === 'videos') {
     body.innerHTML = buildVideoEmbed(item);
-    // Set up video error handling
     setTimeout(() => {
       const vid = document.getElementById('vid-player');
       if (vid) {
@@ -490,7 +458,6 @@ function openModal(item, type) {
   document.body.style.overflow = 'hidden';
 }
 function closeModal() {
-  // Stop any playing video
   const vid = document.getElementById('vid-player');
   if (vid) vid.pause();
   document.getElementById('modal').classList.remove('open');
