@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSI Consulting | Client Resource Center</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--navy:#1a2332;--navy-light:#243447;--accent:#2c8ecb;--accent-hover:#2479b0;--gold:#c9a84c;--bg:#f5f7fa;--white:#fff;--text-dark:#1a2332;--text-mid:#4a5568;--text-light:#718096;--border:#e2e8f0}
+  body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6}
+  nav{background:var(--navy);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .logo-icon{width:40px;height:40px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff}
+  .logo-text{font-size:16px;font-weight:600;color:#fff;letter-spacing:1px}
+  .logo-sub{font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2px;text-transform:uppercase}
+  .nav-links{display:flex;gap:24px}
+  .nav-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:#fff}
+  .hero{background:linear-gradient(135deg,var(--navy),var(--navy-light));text-align:center;padding:56px 40px 48px;color:#fff}
+  .hero h1{font-size:36px;font-weight:700;letter-spacing:1px;margin-bottom:10px}
+  .hero h1 span{color:var(--accent)}
+  .search-wrap{max-width:520px;margin:0 auto;position:relative}
+  .search-wrap input{width:100%;padding:14px 20px 14px 48px;border-radius:8px;border:none;font-family:'Montserrat',sans-serif;font-size:14px;color:var(--text-dark);background:var(--white);box-shadow:0 4px 16px rgba(0,0,0,.15);outline:none}
+  .search-wrap input::placeholder{color:var(--text-light)}
+  .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--text-light);pointer-events:none}
+  .search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:18px;color:var(--text-light);cursor:pointer;display:none}
+  .search-clear.show{display:block}
+  section{padding:40px 40px 32px;max-width:1280px;margin:0 auto}
+  .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+  .section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:4px;font-weight:600}
+  .section-title{font-size:22px;font-weight:700;color:var(--text-dark)}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tab{padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text-light);cursor:pointer;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:.3px;transition:all .2s}
+  .tab:hover{border-color:var(--accent);color:var(--accent)}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+  .card-thumb{height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .card-thumb .icon{font-size:32px;opacity:.6}
+  .card-thumb .overlay{position:absolute;inset:0;background:rgba(44,142,203,.2);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+  .card:hover .card-thumb .overlay{opacity:1}
+  .overlay-btn{padding:6px 16px;border-radius:20px;background:var(--accent);color:#fff;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;border:none}
+  .card-body{padding:12px 14px 14px}
+  .card-tag{font-size:9px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+  .card-title{font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:4px;line-height:1.3}
+  .card-desc{font-size:11px;color:var(--text-light);font-weight:300;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card .vid-dur{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.7);padding:2px 8px;border-radius:4px;font-size:10px;color:#fff}
+  .card .file-badge{position:absolute;top:6px;right:6px;background:var(--accent);padding:2px 8px;border-radius:4px;font-size:9px;color:#fff;font-weight:600;letter-spacing:.5px}
+  .thumb-method{background:linear-gradient(135deg,#e8f0fe,#d4e4f7)}
+  .thumb-comms{background:linear-gradient(135deg,#e0f2fe,#bae0fd)}
+  .thumb-training{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
+  .thumb-video{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+  .section-divider{height:1px;background:var(--border);max-width:1280px;margin:0 auto}
+  .no-results{grid-column:1/-1;text-align:center;padding:40px;color:var(--text-light);font-size:14px;font-weight:300}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:40px;backdrop-filter:blur(4px)}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--white);border-radius:14px;width:100%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.2);overflow:hidden}
+  .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border)}
+  .modal-header h2{font-size:16px;font-weight:600;color:var(--text-dark)}
+  .modal-close{width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid var(--border);color:var(--text-light);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .modal-close:hover{background:#fee2e2;color:#dc2626;border-color:#fecaca}
+  .modal-body{padding:24px;overflow-y:auto;flex:1}
+  .modal-tag{font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+  .modal-body p{color:var(--text-mid);font-size:13px;line-height:1.8;margin-bottom:14px;font-weight:400}
+
+  .doc-preview{background:var(--white);color:#222;border:1px solid var(--border);border-radius:8px;padding:28px;min-height:280px;font-size:13px;line-height:1.8}
+  .doc-preview h4{color:var(--navy);font-size:17px;margin-bottom:10px}
+  .doc-preview p{color:#444;margin-bottom:10px;font-weight:400}
+  .doc-preview .doc-logo{text-align:center;margin-bottom:16px;font-weight:700;font-size:13px;color:var(--accent);letter-spacing:2px}
+
+  /* PDF EMBED */
+  .pdf-container{width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#525659}
+  .pdf-container iframe{width:100%;height:70vh;border:none;display:block}
+  .pdf-error{display:none;text-align:center;padding:40px 20px;background:var(--bg);border-radius:8px;border:1px solid var(--border)}
+  .pdf-error .pdf-error-icon{font-size:48px;margin-bottom:16px;opacity:.5}
+  .pdf-error p{color:var(--text-mid);font-size:13px;margin-bottom:16px}
+  .pdf-error .btn-download{display:inline-block;padding:10px 24px;border-radius:7px;background:var(--accent);color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.5px;transition:background .2s}
+  .pdf-error .btn-download:hover{background:var(--accent-hover)}
+
+  /* PAGINATED DOC */
+  .page-nav{display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 0 0;border-top:1px solid var(--border);margin-top:20px}
+  .page-btn{padding:7px 18px;border-radius:6px;border:1px solid var(--border);background:var(--white);color:var(--text-mid);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s}
+  .page-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .page-btn:disabled{opacity:.35;cursor:default}
+  .page-info{font-size:11px;color:var(--text-light);font-weight:500}
+
+  /* TABLE STYLES */
+  .doc-preview table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}
+  .doc-preview th{background:#edf2f7;padding:8px 10px;text-align:left;font-weight:600;border:1px solid #ddd;font-size:11px;color:var(--navy)}
+  .doc-preview td{padding:8px 10px;border:1px solid #ddd;vertical-align:top;line-height:1.6}
+
+  /* VIDEO EMBED */
+  .video-container{background:#000;border-radius:8px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative}
+  .video-container iframe{width:100%;height:100%;border:none}
+  .video-container video{width:100%;height:100%;object-fit:contain;background:#000}
+  .play-btn{width:64px;height:64px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}
+  .play-btn:hover{transform:scale(1.1)}
+  .play-btn::after{content:'';width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:20px solid #fff;margin-left:3px}
+  .video-label{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,.7);padding:5px 12px;border-radius:5px;font-size:10px;color:#ccc}
+  .video-error{display:none;flex-direction:column;align-items:center;gap:12px;padding:40px}
+  .video-error .video-error-icon{font-size:48px;opacity:.5}
+  .video-error p{color:#999;font-size:12px;text-align:center}
+
+  .modal-footer{padding:14px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+  .btn-secondary{padding:9px 22px;border-radius:7px;border:1px solid var(--border);background:var(--white);color:var(--text-mid);font-size:12px;font-family:'Montserrat',sans-serif;font-weight:500;cursor:pointer;transition:all .2s}
+  .btn-secondary:hover{border-color:var(--text-mid);color:var(--text-dark)}
+  .btn-primary{padding:9px 22px;border-radius:7px;border:none;background:var(--accent);color:#fff;font-size:12px;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .btn-primary:hover{background:var(--accent-hover)}
+
+  .cta-section{text-align:center;padding:60px 40px;background:var(--navy);color:#fff}
+  .cta-section h2{font-size:24px;font-weight:700;margin-bottom:10px}
+  .cta-section p{color:rgba(255,255,255,.6);margin-bottom:24px;font-weight:300;font-size:14px}
+  .cta-btn{padding:12px 36px;border-radius:7px;border:none;background:var(--accent);color:#fff;font-size:12px;font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+  .cta-btn:hover{background:var(--accent-hover)}
+  footer{text-align:center;padding:24px 40px;border-top:1px solid var(--border);background:var(--white);font-size:10px;color:var(--text-light);letter-spacing:1px}
+  footer a{color:var(--accent);text-decoration:none}
+
+  /* COPY PROTECTION */
+  .doc-preview{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+
+  @media(max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:768px){nav{padding:12px 16px;flex-wrap:wrap;gap:10px}.nav-links{gap:12px}.nav-links a{font-size:10px}.hero{padding:40px 20px 36px}.hero h1{font-size:26px}section{padding:28px 16px 24px}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.modal-overlay{padding:12px}.section-header{flex-direction:column;align-items:flex-start}.pdf-container iframe{height:50vh}}
+  @media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">KSI</div>
+    <div><div class="logo-text">KSI CONSULTING</div><div class="logo-sub">KSI Resource Center</div></div>
+  </a>
+  <div class="nav-links">
+    <a href="#methodology" class="active">Our Methodology</a>
+    <a href="#comms">Communications</a>
+    <a href="#training">Training</a>
+    <a href="#videos">Videos</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1><span>KSI</span> <span>Resource Center</span></h1>
+  <p>Explore our methodology, sample communications, training materials, and video resources.</p>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Search all resources..." oninput="handleSearch(this.value)">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
+  </div>
+</div>
+
+<section id="methodology">
+  <div class="section-header">
+    <div><div class="section-label">Our Methodology</div><div class="section-title">How We Deliver Results</div></div>
+    <div class="tabs" data-section="methodology">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="overview">Overview</button>
+      <button class="tab" data-filter="strategy">Strategy</button>
+      <button class="tab" data-filter="plans">Plans</button>
+      <button class="tab" data-filter="dashboards">Dashboards</button>
+    </div>
+  </div>
+  <div class="grid" id="methodology-grid"></div>
+</section>
+<div class="section-divider"></div>
+
+<section id="comms">
+  <div class="section-header">
+    <div><div class="section-label">Communications</div><div class="section-title">Sample Communications</div></div>
+    <div class="tabs" data-section="comms">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="employees">Employees</button>
+      <button class="tab" data-filter="managers">Managers</button>
+      <button class="tab" data-filter="hr">HR</button>
+      <button class="tab" data-filter="leadership">Leadership</button>
+    </div>
+  </div>
+  <div class="grid" id="comms-grid"></div>
+</section>
+<div class="section-divider"></div>
+
+<section id="training">
+  <div class="section-header">
+    <div><div class="section-label">Training</div><div class="section-title">Training Content Samples</div></div>
+    <div class="tabs" data-section="training">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="employees">Employees</button>
+      <button class="tab" data-filter="managers">Managers</button>
+      <button class="tab" data-filter="hr">HR</button>
+      <button class="tab" data-filter="leadership">Leadership</button>
+    </div>
+  </div>
+  <div class="grid" id="training-grid"></div>
+</section>
+<div class="section-divider"></div>
+
+<section id="videos">
+  <div class="section-header">
+    <div><div class="section-label">Videos</div><div class="section-title">Video Resources</div></div>
+    <div class="tabs" data-section="videos">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="concepts">Concepts</button>
+      <button class="tab" data-filter="instructions">Instructions</button>
+      <button class="tab" data-filter="demonstrations">Demonstrations</button>
+      <button class="tab" data-filter="announcements">Announcements</button>
+    </div>
+  </div>
+  <div class="grid" id="videos-grid"></div>
+</section>
+
+<div class="cta-section" id="contact">
+  <h2>Ready to Get Started?</h2>
+  <p>Let's discuss how KSI Consulting can support your transformation journey.</p>
+  <button class="cta-btn" onclick="window.open('https://www.ksiconsults.com','_blank')">CONTACT US</button>
+</div>
+<footer>© KSI CONSULTING. DALLAS, TX. ALL RIGHTS RESERVED. &nbsp;|&nbsp; <a href="https://www.ksiconsults.com" target="_blank">KSICONSULTS.COM</a></footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header"><h2 id="modal-title"></h2><button class="modal-close" id="modal-close">&times;</button></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"><button class="btn-secondary" onclick="closeModal()">Close</button></div>
+  </div>
+</div>
+
+<script>
+// ==========================================================
+//  CONFIGURATION — Update this base URL to your GitHub Pages
+//  repo URL once your files are uploaded.
+//  Example: 'https://youruser.github.io/ksi-resources'
+// ==========================================================
+const BASE_URL = 'https://yourusername.github.io/ksi-resources';
+
+// Helper to build full file paths
+const pdfUrl  = (filename) => `${BASE_URL}/docs/${filename}`;
+const videoUrl = (filename) => `${BASE_URL}/videos/${filename}`;
+
+// ========== PAGINATED CONTENT HELPER ==========
+function buildPaginatedDoc(pages, tag) {
+  const id = 'pg_' + Math.random().toString(36).slice(2,8);
+  let html = `<div class="modal-tag">${tag}</div><div id="${id}_wrap">`;
+  pages.forEach((p, i) => {
+    html += `<div class="doc-preview" data-pgidx="${i}" style="display:${i===0?'block':'none'}">${p}</div>`;
+  });
+  html += `<div class="page-nav"><button class="page-btn" id="${id}_prev" onclick="pgNav('${id}',-1)" disabled>← Previous</button><span class="page-info" id="${id}_info">Page 1 of ${pages.length}</span><button class="page-btn" id="${id}_next" onclick="pgNav('${id}',1)" ${pages.length<=1?'disabled':''}>Next →</button></div></div>`;
+  return html;
+}
+window._pgState = {};
+function pgNav(id, dir) {
+  if (!window._pgState[id]) window._pgState[id] = 0;
+  const wrap = document.getElementById(id+'_wrap');
+  const pgs = wrap.querySelectorAll('.doc-preview');
+  const total = pgs.length;
+  pgs[window._pgState[id]].style.display = 'none';
+  window._pgState[id] = Math.max(0, Math.min(total-1, window._pgState[id]+dir));
+  pgs[window._pgState[id]].style.display = 'block';
+  document.getElementById(id+'_info').textContent = `Page ${window._pgState[id]+1} of ${total}`;
+  document.getElementById(id+'_prev').disabled = window._pgState[id] === 0;
+  document.getElementById(id+'_next').disabled = window._pgState[id] === total-1;
+  wrap.closest('.modal-body').scrollTop = 0;
+}
+
+// ========== PDF EMBED HELPER ==========
+function buildPdfEmbed(item) {
+  const url = item.embedPdf;
+  return `
+    <div class="modal-tag">${item.tag}</div>
+    <div class="pdf-container" id="pdf-wrap">
+      <iframe src="${url}" id="pdf-frame" onload="document.getElementById('pdf-wrap').style.display='block'" onerror="showPdfError()"></iframe>
+    </div>
+    <div class="pdf-error" id="pdf-error">
+      <div class="pdf-error-icon">📄</div>
+      <p>PDF preview is unavailable in this browser.<br>You can download the file directly instead.</p>
+      <a href="${url}" target="_blank" class="btn-download">⬇ Download PDF</a>
+    </div>
+    <p style="margin-top:16px">${item.desc}</p>`;
+}
+function showPdfError() {
+  const wrap = document.getElementById('pdf-wrap');
+  const err = document.getElementById('pdf-error');
+  if (wrap) wrap.style.display = 'none';
+  if (err) err.style.display = 'flex';
+}
+
+// ========== VIDEO EMBED HELPER ==========
+function buildVideoEmbed(item) {
+  if (item.videoSrc) {
+    const src = item.videoSrc;
+    return `
+      <div class="modal-tag">${item.tag} &nbsp;•&nbsp; ${item.duration || 'Video'}</div>
+      <div class="video-container" id="video-wrap">
+        <video controls preload="metadata" id="vid-player">
+          <source src="${src}" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-error" id="video-error">
+        <div class="video-error-icon">🎬</div>
+        <p>Video file not found or cannot be played.<br>Check that the file has been uploaded to your hosting.</p>
+      </div>
+      <p style="margin-top:16px">${item.desc}</p>`;
+  }
+  // Fallback placeholder for videos without a source
+  return `
+    <div class="modal-tag">${item.tag} &nbsp;•&nbsp; ${item.duration || 'Video'}</div>
+    <div class="video-container">
+      <button class="play-btn" title="Play"></button>
+      <div class="video-label">Sample — ${item.title}</div>
+    </div>
+    <p style="margin-top:16px">${item.desc}</p>
+    <p>This is a placeholder. Add a <code>videoSrc</code> to this item's data to embed your MP4 file.</p>`;
+}
+
+// ========== DATA ==========
+const methodData = [
+  {id:'m1',cat:'overview',tag:'Overview',title:'Transformation Methodology Overview',desc:'Our proven end-to-end methodology for delivering successful transformations.',
+    embedPdf: pdfUrl('transformation-methodology-overview.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — METHODOLOGY</div><h4>Transformation Methodology Overview</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Five Core Phases:</strong></p><p><strong>1. Assess & Discover</strong> — Evaluate current state, identify gaps, stakeholder interviews, process mapping.</p><p><strong>2. Strategy & Design</strong> — Future-state vision, operating model, technology roadmap, success metrics.</p><p><strong>3. Plan & Prepare</strong> — Project plans, governance, communications, change management roadmaps.</p><p><strong>4. Execute & Deliver</strong> — Disciplined program management, testing, training, go-live readiness.</p><p><strong>5. Optimize & Sustain</strong> — Hypercare, adoption measurement, process refinement, value realization.</p></div>`},
+  {id:'m2',cat:'strategy',tag:'Strategy',title:'Transformation Strategy Framework',desc:'Aligning technology, process, and organizational change with business goals.',
+    embedPdf: pdfUrl('transformation-strategy-framework.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — STRATEGY</div><h4>Transformation Strategy Framework</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>🎯 Business Alignment</strong> — Anchored to measurable business outcomes.</p><p><strong>⚙️ Operating Model</strong> — Service delivery, COEs, shared services redesign.</p><p><strong>💻 Technology Roadmap</strong> — Vendor-agnostic, independent evaluation.</p><p><strong>👥 Change Readiness</strong> — Integrated from day one.</p></div>`},
+  {id:'m3',cat:'strategy',tag:'Strategy',title:'Vendor Evaluation Strategy',desc:'Independent approach to evaluating and selecting best-fit technology partners.',
+    embedPdf: pdfUrl('vendor-evaluation-strategy.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — STRATEGY</div><h4>Vendor Evaluation Strategy</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Step 1:</strong> Requirements Definition — prioritized by business impact.</p><p><strong>Step 2:</strong> Market Scan & Shortlist — 3–4 best-suited vendors.</p><p><strong>Step 3:</strong> Structured Demonstrations — scenario-based, real-world.</p><p><strong>Step 4:</strong> Scoring & Analysis — weighted model across key dimensions.</p><p><strong>Step 5:</strong> Negotiation Support — 15–25% average savings.</p></div>`},
+  {id:'m4',cat:'plans',tag:'Plans',title:'Program Implementation Plan',desc:'Phased implementation plan with milestones and deliverables.',
+    embedPdf: pdfUrl('program-implementation-plan.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — PLANS</div><h4>Program Implementation Plan</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Phase 1: Initiate (Wk 1–4)</strong> — Charter, governance, kickoff.</p><p><strong>Phase 2: Design (Wk 5–20)</strong> — Workshops, configuration, integrations.</p><p><strong>Phase 3: Test (Wk 21–36)</strong> — SIT, UAT, migration, training.</p><p><strong>Phase 4: Deploy (Wk 37–48)</strong> — Go-live, hypercare, optimization.</p></div>`},
+  {id:'m5',cat:'plans',tag:'Plans',title:'Change Management & Comms Plan',desc:'Managing organizational change, engagement, and communications.',
+    embedPdf: pdfUrl('change-management-comms-plan.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — PLANS</div><h4>Change Management & Communications Plan</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>🔍 Stakeholder Analysis</strong> — Impact, influence, and readiness mapping.</p><p><strong>📢 Communications</strong> — Exec messages, newsletters, campaigns, manager toolkits.</p><p><strong>🤝 Champion Network</strong> — 40–60 champions with briefings and recognition.</p><p><strong>📊 Adoption Metrics</strong> — Login rates, training completion, help desk volumes.</p></div>`},
+  {id:'m6',cat:'dashboards',tag:'Dashboards',title:'Executive Program Dashboard',desc:'Real-time program health, milestones, risks, and decisions.',
+    embedPdf: pdfUrl('executive-program-dashboard.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — DASHBOARD</div><h4>Executive Program Dashboard</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p style="text-align:center"><strong>Program: 🟢 &nbsp;|&nbsp; Budget: 🟢 &nbsp;|&nbsp; Timeline: 🟡</strong></p><p>✅ Kickoff ✅ Design ✅ Config 🔄 UAT (78%) ⬜ Training ⬜ Go-Live</p><p>UAT: 245/312 | Defects: 2 | Training: 83.6% | Readiness: 4.1/5.0</p></div>`},
+  {id:'m7',cat:'dashboards',tag:'Dashboards',title:'Change Adoption Dashboard',desc:'Training completion, communications reach, and employee sentiment.',
+    embedPdf: pdfUrl('change-adoption-dashboard.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — DASHBOARD</div><h4>Change Adoption Dashboard</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p style="text-align:center"><strong>Adoption Health: 🟢 Strong</strong></p><p>eLearning: 88% | Manager ILT: 76% | HR Admin: 100% ✅</p><p>Email open: 72% | Intranet: 3,420 views | Town hall: 68%</p><p>Sentiment — Understand: 4.2 | Prepared: 3.8 | Help: 4.4</p></div>`}
+];
+
+const commsData = [
+  {id:'c1',cat:'employees',tag:'Employees',title:'Transformation Kickoff Announcement',desc:'Company-wide announcement introducing the HR transformation initiative.',
+    embedPdf: pdfUrl('comms-transformation-kickoff.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Transformation Kickoff Announcement</h4><p><strong>To:</strong> All Employees &nbsp;|&nbsp; <strong>From:</strong> CHRO</p><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>Dear Team,</p><p>I'm excited to share that we are embarking on a significant initiative to modernize our HR systems and processes.</p><p><strong>What's Changing:</strong> A new HCM platform streamlining onboarding, benefits, time tracking, and performance management.</p><p><strong>Why This Matters:</strong> More intuitive, integrated tools aligned with how we work today.</p><p><strong>What to Expect:</strong> We've partnered with KSI Consulting to guide us. More details coming soon.</p></div>`},
+  {id:'c2',cat:'employees',tag:'Employees',title:'Go-Live Readiness Email',desc:'Pre-launch checklist for employees.',
+    embedPdf: pdfUrl('comms-go-live-readiness.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Go-Live Readiness Checklist</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>☑ Complete Training by [Date]<br>☑ Verify Personal Info<br>☑ Save Important Documents<br>☑ Bookmark the New Portal</p></div>`},
+  {id:'c3',cat:'employees',tag:'Employees',title:'Post Go-Live Support Guide',desc:'Support resources available after launch.',
+    embedPdf: pdfUrl('comms-post-go-live-support.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Post Go-Live Support</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>🖥 Self-Service resources, video tutorials, FAQ<br>📞 Hypercare Weeks 1–4: Extended hours 7AM–7PM<br>📧 Ongoing: HR Help Desk Mon–Fri 8AM–5PM</p></div>`},
+  {id:'c4',cat:'managers',tag:'Managers',title:'Manager Change Champion Toolkit',desc:'Resource kit for managers to drive team adoption.',
+    embedPdf: pdfUrl('comms-manager-champion-toolkit.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Manager Change Champion Toolkit</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Responsibilities:</strong> Attend briefings, share updates, encourage training, gather feedback.</p><p><strong>Talking Points:</strong> Training available, simpler time-off, go-live on track, multi-channel support.</p></div>`},
+  {id:'c5',cat:'managers',tag:'Managers',title:'Manager Pre-Go-Live Actions',desc:'Specific actions required from managers before launch.',
+    embedPdf: pdfUrl('comms-manager-pre-go-live.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Manager Pre-Go-Live Actions</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>☑ Complete manager training<br>☑ Verify team roster<br>☑ Set up approval delegation<br>☑ Communicate with team<br>☑ Minimize meetings go-live week</p></div>`},
+  {id:'c6',cat:'hr',tag:'HR',title:'HR Team Readiness Checklist',desc:'HR team preparation for cutover and post-launch support.',
+    embedPdf: pdfUrl('comms-hr-readiness-checklist.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>HR Team Readiness</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Training:</strong> Complete admin modules, pass certification 85%+<br><strong>Data:</strong> Validate migration, confirm configs, test security<br><strong>Support:</strong> Review hypercare schedule, escalation process</p></div>`},
+  {id:'c7',cat:'hr',tag:'HR',title:'HR Process Transition Guide',desc:'How daily HR processes change in the new system.',
+    embedPdf: pdfUrl('comms-hr-process-transition.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>HR Process Transition</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Onboarding:</strong> Paper → digital workflow<br><strong>Data Changes:</strong> Manual → employee self-service<br><strong>Reporting:</strong> Excel pulls → real-time dashboards<br><strong>Benefits:</strong> Paper enrollment → online with auto-eligibility</p></div>`},
+  {id:'c8',cat:'leadership',tag:'Leadership',title:'Steering Committee Status Update',desc:'Executive-level project status report.',
+    embedPdf: pdfUrl('comms-steering-committee-status.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Steering Committee Status</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Status: 🟢 On Track</strong></p><p>UAT 94% pass rate. Change management ramping for go-live.</p><p><strong>Decision Needed:</strong> Approve production cutover.</p></div>`},
+  {id:'c9',cat:'leadership',tag:'Leadership',title:'Business Case Executive Summary',desc:'Business case for leadership investment approval.',
+    embedPdf: pdfUrl('comms-business-case-summary.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — SAMPLE COMMUNICATION</div><h4>Business Case</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Benefits (3-Year):</strong> $2.4M gains, 40% processing reduction, 90%+ self-service</p><p><strong>Investment:</strong> $1.8M + $420K/yr &nbsp;|&nbsp; <strong>Payback:</strong> 22 months</p></div>`}
+];
+
+// ===== TRAINING: Hire an Associate (paginated) =====
+const hireAssocPages = [
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">OVERVIEW</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p>This guide provides an overview of the steps involved in hiring an employee. This includes two scenarios:</p><p>• <strong>Section A:</strong> Hire through Recruiting Process<br>• <strong>Section B:</strong> Ad-hoc Hires</p><p>The Hire step in the recruiting process is redirected to HRSS once Recruiting Coordinators have indicated that the candidate successfully cleared the background check and are marked "Ready for Hire".</p><p>The Ad-hoc Hire process will be used for international hires until Phase 2 in the summer of 2023 when the Workday Recruiting module goes live for International. In North America, this process will be used for the exceptional cases where the hiring is done outside the recruiting process.</p><p>An open position must be created prior to the ad-hoc hire.</p><p style="margin-top:16px"><strong>Editing Form Fields</strong></p><p>• The <strong>Prompt icon</strong> inside a field lets you choose a value from the available options. You can also start typing the value and press enter to view related search results.<br>• A <strong>red asterisk</strong> next to a field indicates the field is Mandatory and must be filled to submit a form.</p>`,
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION A: HIRE THROUGH RECRUITING PROCESS</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p><strong>Step 1: Initiating the Task</strong></p><p>Click the <strong>Inbox</strong> icon at the top-right corner of the Home page and locate the task title <em>Hire: [Candidate Name] – [Position]</em>. Click on the task to view the Revise Employee Hire task details.</p><p>Most of the information will be populated from the job requisition. Cross check the details to ensure completeness and accuracy.</p><p>Prior to completing this task, check again for duplicate records in Workday and in external information files from legacy systems. Update prehire information such as legal name.</p><p style="margin-top:12px"><strong>Complete the Additional Information section:</strong></p><table><tr><th style="width:30%">Field</th><th>Key Considerations</th></tr><tr><td><strong>Business Title</strong></td><td>Edit if the Business Title needs to be different from the Job Title.</td></tr><tr><td><strong>Additional Job Classifications</strong></td><td>Select applicable type if part of Sales organization OR appropriate EEO category for US reporting.</td></tr><tr><td><strong>Company Insider Types</strong></td><td>Will default from Job Profile and should not be changed.</td></tr><tr><td><strong>Workers' Comp Code Override</strong></td><td>Defaults from Job Profile — don't edit; issues corrected by HRIS at job profile level.</td></tr></table>`,
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION A: ADDITIONAL FIELDS & SUBSEQUENT TASKS</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><table><tr><th style="width:30%">Field</th><th>Key Considerations</th></tr><tr><td><strong>First Day of Work</strong></td><td>The New Hire's actual start date. Defaults to Hire Date but can be updated with the Calendar icon.</td></tr><tr><td><strong>Continuous Service Date</strong></td><td>Defaults to Hire Date. Adjust if it should be bridged to include a previous period of employment. Used for service awards, vacation, and benefits.</td></tr><tr><td><strong>End Employment Date</strong></td><td>Select for employee types with a fixed end date.</td></tr><tr><td><strong>Benefits Service Date</strong></td><td>Leave blank unless new hire is not immediately eligible; enter the date eligibility starts.</td></tr><tr><td><strong>Company Service Date</strong></td><td>Should reflect date of hire/transfer into a new legal entity.</td></tr></table><p>Click <strong>Submit</strong> when finished. This kicks off sequential tasks for HRSS:</p><p>• <strong>Propose Compensation Hire</strong> — check plan assignments, add/edit as needed<br>• <strong>Change Organization Assignments</strong> — check cost center and custom org assignments<br>• <strong>Change Personal Information</strong> — make generic entries for required fields by country<br>• <strong>Edit Government IDs</strong> — ensure national ID captured for all countries<br>• <strong>Edit Service Dates</strong> — check continuous service date (internal hire) and company service date (transfer/rehire)</p><p style="padding:10px;background:#e8f4fd;border-radius:6px;color:#1a5276;font-size:12px"><strong>🇨🇦 Canada Hires:</strong> Employment Equity Act requires HRSS to enter: Gender – "Not Declared", Visible Minority – "Decline to answer", Aboriginal/Indigenous – "Decline to answer", Disability – "Decline to answer". The associate updates these through their onboarding tasks.</p>`,
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION A: ADDITIONAL TASKS</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p><strong>Additional HRSS Tasks (continued):</strong></p><p>• <strong>Manage Union Membership</strong> — For Nemschoff hourly hires only; contact local HRBP to confirm details<br>• <strong>Request One-Time Payment</strong> — Add applicable sign-on bonus or relocation bonus if agreed at time of offer<br>• <strong>Request One-Time Payment for Referral</strong> — Add payment for the current employee who referred the candidate</p><p style="margin-top:16px"><strong>Tasks Assigned to Other Roles:</strong></p><p>• <strong>Payroll</strong> receives a task to <em>Assign Pay Group</em><br>• <strong>HRBPs</strong> receive <em>Manage Employee Contracts</em> if the candidate is hired into a fixed-term position<br>• <strong>HRBPs</strong> receive <em>Add Probation Period</em> for Nemschoff in the US and other countries with Unions</p><p style="padding:10px;background:#d1fae5;border-radius:6px;color:#065f46;font-size:12px;margin-top:16px"><strong>✅ What Happens Next:</strong> Once all the above tasks are completed, the Onboarding tasks for the Manager and the new hire will be kicked off.</p>`,
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION B: AD-HOC HIRE</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p><strong>Step 1: Initiating the Task</strong></p><p>Type <strong>"Hire Employee"</strong> in the Search bar and press Enter. Click on the Hire Employee task in the Search results.</p><p style="margin-top:16px"><strong>Step 2: Enter Supervisory Org and Hire Details</strong></p><table><tr><th style="width:30%">Field</th><th>Key Considerations</th></tr><tr><td><strong>Supervisory Organization*</strong></td><td>Click the Prompt icon and select the Supervisory Organization for the requisition.</td></tr><tr><td><strong>Type of Hire</strong></td><td>Select one:<br>• <strong>Existing Pre-Hire</strong> – Re-hire an individual already in Workday. Use partial name search if needed (first 3 letters).<br>• <strong>New Pre-Hire</strong> – Hire someone not previously employed or not found in existing records.</td></tr></table><p>Click <strong>OK</strong> to continue.</p>`,
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION B: STEP 3 — CREATE PRE-HIRE</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p>If you selected <strong>New Pre-Hire</strong>, complete the following fields. Skip to Step 4 if you chose "Existing Pre-Hire".</p><table><tr><th style="width:25%">Field</th><th>Key Considerations</th></tr><tr><td><strong>Source</strong></td><td>Select the source for this hire.</td></tr><tr><td><strong>Referred By</strong></td><td>Select the employee(s) who referred the hire, if applicable.</td></tr><tr><td><strong>Comment</strong></td><td>Enter a brief comment about the hire.</td></tr><tr><td><strong>Allow Duplicate Name</strong></td><td>Check to allow a duplicate name in the system.</td></tr></table><p style="margin-top:14px"><strong>Legal Name Information:</strong></p><table><tr><th style="width:25%">Field</th><th>Key Considerations</th></tr><tr><td><strong>Country*</strong></td><td>Defaults to your current country. Use Prompt icon to change.</td></tr><tr><td><strong>First Name*</strong></td><td>Enter pre-hire's legal first name.</td></tr><tr><td><strong>Middle Name</strong></td><td>Enter legal middle name.</td></tr><tr><td><strong>Last Name*</strong></td><td>Enter pre-hire's legal last name.</td></tr></table>`,
+  `<div class="doc-logo">KSI CONSULTING — TRAINING SAMPLE</div><h4>Hire an Associate</h4><p style="font-size:15px;font-weight:600;color:#1a2332;margin-bottom:6px">SECTION B: CONTACT INFORMATION & JOB DETAILS</p><hr style="margin:10px 0;border:none;border-top:1px solid #ddd"><p><strong>Contact Information:</strong> Click Add to enter phone, address, or email. Email is always required so they receive pre-hire Workday access. For rehires, change to personal email if reflecting prior work email.</p><table><tr><th style="width:20%">Type</th><th>Details</th></tr><tr><td><strong>Phone*</strong></td><td>Device type, country code, number, extension, Work/Home</td></tr><tr><td><strong>Address*</strong></td><td>Country, street, city, state, postal code, county, Work/Home</td></tr><tr><td><strong>Email*</strong></td><td>Email address, Work/Home type</td></tr></table><p style="margin-top:14px"><strong>Step 4: Enter Job Details</strong></p><table><tr><th style="width:25%">Field</th><th>Key Considerations</th></tr><tr><td><strong>Hire Date*</strong></td><td>Select with the Calendar icon.</td></tr><tr><td><strong>Reason</strong></td><td>Select the reason for the hire.</td></tr><tr><td><strong>Position*</strong></td><td>Select the position. Other fields auto-populate.</td></tr><tr><td><strong>Business Title</strong></td><td>Change to match the offer letter.</td></tr><tr><td><strong>Scheduled Weekly Hours</strong></td><td>Used to calculate FTE. Defaults to location standard.</td></tr><tr><td><strong>First Day of Work</strong></td><td>Actual start date. Defaults to Hire Date.</td></tr><tr><td><strong>Continuous Service Date</strong></td><td>Confirm if rehire; compute and enter bridged date.</td></tr></table><p>Click <strong>Submit</strong>. This triggers the same sequential HRSS tasks as Section A: Propose Compensation, Change Org Assignments, Change Personal Info, Edit Government IDs, and Request One-Time Payments.</p>`
+];
+
+const trainingData = [
+  {id:'t1',cat:'hr',tag:'HR',title:'Hire an Associate — Workday Process Guide',desc:'Complete guide for hiring employees through the Recruiting process and Ad-hoc hires in Workday.',
+    embedPdf: pdfUrl('training-hire-associate.pdf'),
+    pages: hireAssocPages},
+  {id:'t2',cat:'employees',tag:'Employees',title:'Self-Service Quick Start Guide',desc:'Step-by-step guide to navigate the new self-service portal.',
+    embedPdf: pdfUrl('training-self-service-quickstart.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Employee Self-Service — Quick Start</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>1. Log In</strong> — SSO at [URL] with MFA setup.<br><strong>2. Personal Info</strong> — My Profile → Personal Details.<br><strong>3. Time Off</strong> — Time & Absence → Request Time Off.<br><strong>4. Pay Stubs</strong> — Pay → Pay Statements.<br><strong>5. Benefits</strong> — Benefits → Enroll during Open Enrollment.</p></div>`},
+  {id:'t3',cat:'employees',tag:'Employees',title:'Mobile App Training Guide',desc:'Using the mobile app for self-service on the go.',
+    embedPdf: pdfUrl('training-mobile-app-guide.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Mobile App Guide</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>Download → Enter tenant URL → Sign in → Enable biometrics.</p><p>✅ Time-off ✅ Clock in/out ✅ Pay stubs ✅ Directory ✅ Benefits</p></div>`},
+  {id:'t4',cat:'managers',tag:'Managers',title:'Manager Approval Workflows',desc:'Approval workflows for time-off, expenses, and requisitions.',
+    embedPdf: pdfUrl('training-manager-approval-workflows.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Manager Approval Workflows</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p><strong>Time-Off:</strong> Review + Approve/Send Back<br><strong>Expenses:</strong> Verify receipts and policy limits<br><strong>Requisitions:</strong> Review justification → auto-routes</p><p>Set up delegation under My Account → Delegations.</p></div>`},
+  {id:'t5',cat:'managers',tag:'Managers',title:'People Analytics Dashboard',desc:'Workforce analytics dashboards for data-driven decisions.',
+    embedPdf: pdfUrl('training-people-analytics.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>People Analytics Dashboard</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>📊 Headcount &nbsp; 📈 Turnover &nbsp; ⏱ Absence &nbsp; 🎯 Performance</p><p>Filter by department, location, level, time. Export to Excel/PDF.</p></div>`},
+  {id:'t6',cat:'leadership',tag:'Leadership',title:'Executive Sponsor Briefing Guide',desc:'Executive sponsor role and engagement expectations.',
+    embedPdf: pdfUrl('training-executive-sponsor-briefing.pdf'),
+    content:`<div class="doc-preview"><div class="doc-logo">KSI CONSULTING — TRAINING</div><h4>Executive Sponsor Briefing</h4><hr style="margin:14px 0;border:none;border-top:1px solid #ddd"><p>Active sponsorship is the #1 predictor of successful change.</p><p>Champion vision, attend steering committee, remove barriers, communicate, model adoption.</p></div>`}
+];
+
+const videosData = [
+  {id:'v1',cat:'instructions',tag:'Instructions',title:'Create a Job Requisition',desc:'Video walkthrough demonstrating how to create a job requisition in the system.',duration:'Video',
+    videoSrc: videoUrl('create-job-requisition.mp4')},
+  {id:'v2',cat:'concepts',tag:'Concepts',title:'What is HR Transformation?',desc:'Overview of HR transformation and how it drives business value.',duration:'5:12',
+    videoSrc: videoUrl('what-is-hr-transformation.mp4')},
+  {id:'v3',cat:'concepts',tag:'Concepts',title:'Understanding Change Management',desc:'Key change management concepts and organizational readiness.',duration:'4:45',
+    videoSrc: videoUrl('understanding-change-management.mp4')},
+  {id:'v4',cat:'instructions',tag:'Instructions',title:'How to Submit a Time-Off Request',desc:'Step-by-step instructions for requesting time off.',duration:'2:30',
+    videoSrc: videoUrl('submit-time-off-request.mp4')},
+  {id:'v5',cat:'demonstrations',tag:'Demonstrations',title:'Employee Self-Service Portal Demo',desc:'Live demo of the self-service portal features.',duration:'6:48',
+    videoSrc: videoUrl('self-service-portal-demo.mp4')},
+  {id:'v6',cat:'demonstrations',tag:'Demonstrations',title:'People Analytics Dashboard Demo',desc:'Analytics dashboard with real-time workforce metrics.',duration:'5:30',
+    videoSrc: videoUrl('people-analytics-demo.mp4')},
+  {id:'v7',cat:'announcements',tag:'Announcements',title:'Our Transformation Journey Begins',desc:'Leadership message announcing the initiative.',duration:'4:10',
+    videoSrc: videoUrl('transformation-journey-begins.mp4')},
+  {id:'v8',cat:'announcements',tag:'Announcements',title:'Go-Live Celebration & Thank You',desc:'Leadership celebrates successful launch.',duration:'3:22',
+    videoSrc: videoUrl('go-live-celebration.mp4')}
+];
+
+// ========== RENDER ==========
+function renderCards(data, gridId, type) {
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = '';
+  if (!data.length) { grid.innerHTML = '<div class="no-results">No resources found.</div>'; return; }
+  const cls = {method:'thumb-method',comms:'thumb-comms',training:'thumb-training',videos:'thumb-video'}[type];
+  const icon = {method:'📋',comms:'📄',training:'📘',videos:'🎬'}[type];
+  data.forEach(item => {
+    const c = document.createElement('div');
+    c.className = 'card'; c.dataset.cat = item.cat;
+    c.dataset.title = item.title.toLowerCase(); c.dataset.desc = item.desc.toLowerCase();
+    const hasPdf = item.embedPdf && type !== 'videos';
+    const hasVideo = item.videoSrc && type === 'videos';
+    const badge = hasPdf ? '<div class="file-badge">PDF</div>' : hasVideo ? '<div class="file-badge">MP4</div>' : '';
+    c.innerHTML = `<div class="card-thumb ${cls}"><div class="icon">${icon}</div>${item.duration?`<div class="vid-dur">${item.duration}</div>`:''}${badge}<div class="overlay"><span class="overlay-btn">${type==='videos'?'Watch':'View'}</span></div></div><div class="card-body"><div class="card-tag">${item.tag}</div><div class="card-title">${item.title}</div><div class="card-desc">${item.desc}</div></div>`;
+    c.onclick = () => openModal(item, type);
+    grid.appendChild(c);
+  });
+}
+
+// ========== SEARCH ==========
+function handleSearch(q) {
+  document.getElementById('searchClear').classList.toggle('show', q.length > 0);
+  const t = q.toLowerCase().trim();
+  document.querySelectorAll('.grid').forEach(g => {
+    g.querySelectorAll('.card').forEach(c => {
+      if (!t) { c.style.display = ''; return; }
+      c.style.display = (c.dataset.title.includes(t)||c.dataset.desc.includes(t)||c.dataset.cat.includes(t)) ? '' : 'none';
+    });
+  });
+  if (t) document.querySelectorAll('.tabs').forEach(tg => tg.querySelectorAll('.tab').forEach(tb => tb.classList.toggle('active', tb.dataset.filter==='all')));
+}
+function clearSearch() { const i=document.getElementById('search'); i.value=''; handleSearch(''); i.focus(); }
+
+// ========== MODAL ==========
+function openModal(item, type) {
+  document.getElementById('modal-title').textContent = item.title;
+  const body = document.getElementById('modal-body');
+  const footer = document.getElementById('modal-footer');
+  window._pgState = {};
+
+  if (type === 'videos') {
+    body.innerHTML = buildVideoEmbed(item);
+    // Set up video error handling
+    setTimeout(() => {
+      const vid = document.getElementById('vid-player');
+      if (vid) {
+        vid.onerror = () => {
+          document.getElementById('video-wrap').style.display = 'none';
+          document.getElementById('video-error').style.display = 'flex';
+        };
+      }
+    }, 50);
+    footer.innerHTML = `<button class="btn-secondary" onclick="closeModal()">Close</button>`;
+  } else if (item.embedPdf) {
+    body.innerHTML = buildPdfEmbed(item);
+    footer.innerHTML = `<a href="${item.embedPdf}" target="_blank" class="btn-primary">⬇ Download PDF</a><button class="btn-secondary" onclick="closeModal()">Close</button>`;
+  } else if (item.pages) {
+    body.innerHTML = buildPaginatedDoc(item.pages, item.tag);
+    footer.innerHTML = `<button class="btn-secondary" onclick="closeModal()">Close</button>`;
+  } else {
+    body.innerHTML = `<div class="modal-tag">${item.tag}</div>${item.content}`;
+    footer.innerHTML = `<button class="btn-secondary" onclick="closeModal()">Close</button>`;
+  }
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  // Stop any playing video
+  const vid = document.getElementById('vid-player');
+  if (vid) vid.pause();
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('modal-close').onclick = closeModal;
+document.getElementById('modal').onclick = e => { if(e.target.id==='modal') closeModal(); };
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+// ========== TABS ==========
+document.querySelectorAll('.tabs').forEach(tg => {
+  tg.querySelectorAll('.tab').forEach(tab => {
+    tab.onclick = () => {
+      document.getElementById('search').value='';
+      document.getElementById('searchClear').classList.remove('show');
+      document.querySelectorAll('.grid .card').forEach(c => c.style.display='');
+      tg.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const f = tab.dataset.filter;
+      document.getElementById(tg.dataset.section+'-grid').querySelectorAll('.card').forEach(c => {
+        c.style.display = (f==='all'||c.dataset.cat===f) ? '' : 'none';
+      });
+    };
+  });
+});
+
+// ========== NAV ==========
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.onclick = () => { document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active')); link.classList.add('active'); };
+});
+
+// ========== INIT ==========
+renderCards(methodData,'methodology-grid','method');
+renderCards(commsData,'comms-grid','comms');
+renderCards(trainingData,'training-grid','training');
+renderCards(videosData,'videos-grid','videos');
+</script>
+</body>
+</html>
