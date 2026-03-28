@@ -51,10 +51,21 @@
       background: #ff0000;
     }
 
-    iframe {
+    .viewer-container {
       flex: 1;
-      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 75%;
+      height: 100%;
       border: none;
+      display: block;
+      background: #fff;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
     }
 
     .error {
@@ -67,35 +78,4 @@
 </head>
 <body>
 
-  <div class="toolbar">
-    <div class="logo">KSI Consulting | Resource Center</div>
-    <div class="doc-title" id="docTitle"></div>
-    <button class="close-btn" onclick="window.close()">✕ Close</button>
-  </div>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const fileUrl = params.get('file');
-    const title = params.get('title') || 'Document Preview';
-
-    document.getElementById('docTitle').textContent = title;
-    document.title = title + ' | KSI Resource Center';
-
-    if (fileUrl) {
-      // Use Google Docs viewer to render PDF in browser instead of Adobe
-      const googleViewer = 'https://docs.google.com/viewer?embedded=true&url=' + encodeURIComponent(fileUrl);
-      const iframe = document.createElement('iframe');
-      iframe.src = googleViewer;
-      iframe.title = title;
-      document.body.appendChild(iframe);
-    } else {
-      const err = document.createElement('div');
-      err.className = 'error';
-      err.textContent = 'No document specified.';
-      document.body.appendChild(err);
-    }
-  </script>
-
-</body>
-</html>
-```
+  <div c
