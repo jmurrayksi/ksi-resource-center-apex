@@ -426,7 +426,10 @@ function handleSearch(q) {
 function clearSearch() { const i=document.getElementById('search'); i.value=''; handleSearch(''); i.focus(); }
 
 // ========== MODAL ==========
-function openModal(item, type) {
+function openModal(item, type) {if (item.externalUrl) {
+    window.open(item.externalUrl, '_blank');
+    return;
+  }
   document.getElementById('modal-title').textContent = item.title;
   const body = document.getElementById('modal-body');
   const footer = document.getElementById('modal-footer');
