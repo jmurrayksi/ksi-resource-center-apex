@@ -10,29 +10,29 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy:      #0A1628;
-    --navy-mid:  #0D2137;
-    --navy-card: #111E30;
-    --blue:      #0066CC;
-    --blue-dim:  #1A4A80;
-    --blue-glow: rgba(0,102,204,0.18);
-    --teal:      #1D9E75;
-    --purple:    #7F77DD;
-    --amber:     #EF9F27;
-    --red:       #D85A30;
-    --white:     #FFFFFF;
-    --offwhite:  #E8EDF5;
-    --muted:     #607090;
-    --light:     #A8BACE;
-    --border:    rgba(255,255,255,0.08);
-    --border-lit: rgba(255,255,255,0.14);
-    --font:      'DM Sans', sans-serif;
-    --mono:      'DM Mono', monospace;
+    --bg:         #F0F4FA;
+    --bg-card:    #FFFFFF;
+    --bg-mid:     #E8EDF6;
+    --blue:       #0055B3;
+    --blue-dim:   #3380CC;
+    --blue-glow:  rgba(0,85,179,0.12);
+    --teal:       #0F8A62;
+    --purple:     #5B52C8;
+    --amber:      #C07800;
+    --red:        #C0410F;
+    --text:       #0E1C2F;
+    --text-mid:   #2D3F57;
+    --muted:      #6A7D96;
+    --light:      #8898AD;
+    --border:     rgba(0,0,0,0.08);
+    --border-lit: rgba(0,0,0,0.14);
+    --font:       'DM Sans', sans-serif;
+    --mono:       'DM Mono', monospace;
   }
 
   html, body {
-    background: var(--navy);
-    color: var(--white);
+    background: var(--bg);
+    color: var(--text);
     font-family: var(--font);
     min-height: 100vh;
     overflow-x: hidden;
@@ -44,8 +44,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(0,102,204,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,102,204,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(0,85,179,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,85,179,0.05) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
     z-index: 0;
@@ -90,7 +90,7 @@
   h1 {
     font-size: 28px;
     font-weight: 600;
-    color: var(--white);
+    color: var(--text);
     line-height: 1.15;
     letter-spacing: -0.02em;
   }
@@ -117,21 +117,22 @@
 
   /* ── MAIN PROGRESS CARD ── */
   .progress-card {
-    background: var(--navy-card);
+    background: var(--bg-card);
     border: 1px solid var(--border-lit);
     border-radius: 16px;
     padding: 28px 32px;
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   }
   .progress-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 1px;
+    height: 3px;
     background: linear-gradient(90deg, transparent, var(--blue), transparent);
-    opacity: 0.6;
+    opacity: 0.5;
   }
 
   .progress-meta-row {
@@ -143,7 +144,7 @@
     gap: 8px;
   }
   .progress-label { font-size: 11px; color: var(--muted); }
-  .progress-label strong { color: var(--light); font-weight: 500; }
+  .progress-label strong { color: var(--text-mid); font-weight: 500; }
   .timeline-endpoints {
     display: flex;
     justify-content: space-between;
@@ -158,7 +159,7 @@
   .track-outer {
     position: relative;
     height: 12px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.07);
     border-radius: 6px;
     overflow: visible;
     margin-bottom: 6px;
@@ -176,7 +177,7 @@
     top: 0; left: 0;
     height: 100%;
     border-radius: 6px;
-    background: rgba(29,158,117,0.28);
+    background: rgba(15,138,98,0.22);
     transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
   }
   .track-projection-fill {
@@ -184,8 +185,8 @@
     top: 0; left: 0;
     height: 100%;
     border-radius: 6px 0 0 6px;
-    border-right: 2px dashed rgba(0,102,204,0.6);
-    background: rgba(0,102,204,0.08);
+    border-right: 2px dashed rgba(0,85,179,0.45);
+    background: rgba(0,85,179,0.08);
     transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
   }
 
@@ -195,7 +196,7 @@
     top: -6px;
     width: 2px;
     height: 24px;
-    background: rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.18);
     border-radius: 1px;
     z-index: 2;
   }
@@ -219,7 +220,7 @@
     border-radius: 2px;
     z-index: 3;
     transition: left 0.4s cubic-bezier(0.4,0,0.2,1);
-    box-shadow: 0 0 8px rgba(0,102,204,0.5);
+    box-shadow: 0 0 8px rgba(0,85,179,0.4);
   }
   .today-pin::after {
     content: attr(data-label);
@@ -248,7 +249,7 @@
     transition: opacity 0.3s;
   }
   .phase-seg.past { opacity: 1; }
-  .phase-seg.future { opacity: 0.25; }
+  .phase-seg.future { opacity: 0.2; }
   .phase-labels {
     display: flex;
     margin-bottom: 20px;
@@ -296,19 +297,20 @@
     margin-bottom: 20px;
   }
   .role-card {
-    background: var(--navy-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px 18px;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
   }
-  .role-card:hover { border-color: var(--border-lit); }
+  .role-card:hover { border-color: var(--border-lit); box-shadow: 0 3px 12px rgba(0,0,0,0.09); }
   .role-accent {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
+    height: 3px;
     border-radius: 12px 12px 0 0;
   }
   .role-header {
@@ -323,11 +325,7 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 10px; font-weight: 600;
   }
-  .role-tl {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
-  .role-name { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 1px; }
+  .role-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
   .role-users { font-size: 10px; color: var(--muted); }
   .role-score {
     font-size: 22px;
@@ -338,24 +336,24 @@
     transition: color 0.3s;
   }
   .role-bar-wrap {
-    height: 4px;
-    background: rgba(255,255,255,0.07);
-    border-radius: 2px;
+    height: 5px;
+    background: rgba(0,0,0,0.07);
+    border-radius: 3px;
     overflow: hidden;
     margin-bottom: 6px;
     position: relative;
   }
   .role-bar-fill {
     height: 100%;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
   }
   .role-target-mark {
     position: absolute;
     top: -1px;
     width: 2px;
-    height: 6px;
-    background: rgba(255,255,255,0.35);
+    height: 7px;
+    background: rgba(0,0,0,0.3);
     border-radius: 1px;
     transition: left 0.4s cubic-bezier(0.4,0,0.2,1);
   }
@@ -367,11 +365,12 @@
 
   /* ── CONTROLS CARD ── */
   .controls-card {
-    background: var(--navy-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 24px 32px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   }
   .controls-title {
     font-size: 11px;
@@ -392,11 +391,11 @@
     align-items: baseline;
     justify-content: space-between;
   }
-  .ctrl-name { font-size: 12px; color: var(--light); }
+  .ctrl-name { font-size: 12px; color: var(--text-mid); }
   .ctrl-readout {
     font-size: 18px;
     font-weight: 600;
-    color: var(--white);
+    color: var(--text);
     font-family: var(--mono);
     letter-spacing: -0.02em;
     transition: color 0.2s;
@@ -408,7 +407,7 @@
     appearance: none;
     width: 100%;
     height: 4px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.12);
     border-radius: 2px;
     outline: none;
     cursor: pointer;
@@ -418,28 +417,29 @@
     width: 16px; height: 16px;
     border-radius: 50%;
     background: var(--blue);
-    border: 2px solid var(--navy);
+    border: 2px solid #fff;
     box-shadow: 0 0 0 2px var(--blue);
     transition: box-shadow 0.2s;
   }
   input[type=range]:hover::-webkit-slider-thumb {
-    box-shadow: 0 0 0 4px rgba(0,102,204,0.3);
+    box-shadow: 0 0 0 4px rgba(0,85,179,0.25);
   }
   input[type=range]::-moz-range-thumb {
     width: 16px; height: 16px;
     border-radius: 50%;
     background: var(--blue);
-    border: 2px solid var(--navy);
+    border: 2px solid #fff;
     cursor: pointer;
   }
 
   /* ── PROJECTION CARD ── */
   .projection-card {
-    background: var(--navy-card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 24px 32px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   }
   .proj-header {
     display: flex;
@@ -449,14 +449,14 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-  .proj-title { font-size: 12px; font-weight: 500; color: var(--light); text-transform: uppercase; letter-spacing: 0.08em; }
+  .proj-title { font-size: 12px; font-weight: 500; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.08em; }
   .proj-gauge-wrap {
     position: relative;
     margin-bottom: 6px;
   }
   .proj-gauge-bg {
     height: 8px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.07);
     border-radius: 4px;
     overflow: hidden;
     position: relative;
@@ -471,7 +471,7 @@
     top: -3px;
     width: 2px;
     height: 14px;
-    background: rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.35);
     border-radius: 1px;
     transition: left 0.4s cubic-bezier(0.4,0,0.2,1);
   }
@@ -523,10 +523,10 @@
   }
   .proj-insight {
     font-size: 12px;
-    color: var(--light);
+    color: var(--text-mid);
     line-height: 1.55;
     padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
+    background: rgba(0,0,0,0.03);
     border-radius: 8px;
     border-left: 3px solid;
     transition: border-color 0.3s;
@@ -545,7 +545,7 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-  .footer-brand { font-weight: 500; color: var(--light); }
+  .footer-brand { font-weight: 500; color: var(--text-mid); }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -609,12 +609,12 @@
 
     <!-- phase segments -->
     <div class="phase-row" id="phase-row">
-      <div class="phase-seg past"   style="flex:2; background:#1A4A80;"></div>
-      <div class="phase-seg past"   style="flex:3; background:#1A5FA0;"></div>
-      <div class="phase-seg past"   style="flex:3; background:#1A75C0;"></div>
-      <div class="phase-seg past"   style="flex:2; background:#0066CC;"></div>
-      <div class="phase-seg future" style="flex:2; background:#0066CC;"></div>
-      <div class="phase-seg future" style="flex:2; background:#0066CC;"></div>
+      <div class="phase-seg past"   style="flex:2; background:#3B7ED4;"></div>
+      <div class="phase-seg past"   style="flex:3; background:#2D6EC4;"></div>
+      <div class="phase-seg past"   style="flex:3; background:#1E5EB4;"></div>
+      <div class="phase-seg past"   style="flex:2; background:#0055B3;"></div>
+      <div class="phase-seg future" style="flex:2; background:#0055B3;"></div>
+      <div class="phase-seg future" style="flex:2; background:#0055B3;"></div>
     </div>
     <div class="phase-labels">
       <div class="phase-label" style="flex:2;">Discovery</div>
@@ -634,7 +634,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-label-sm">Tasks on time</div>
-        <div class="stat-val-lg" id="s-ontime">83%</div>
+        <div class="stat-val-lg" id="s-ontime" style="color:var(--text);">83%</div>
         <div class="stat-delta">↑ 5 pts vs prior</div>
       </div>
       <div class="stat-item">
@@ -644,7 +644,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-label-sm">Sprint velocity</div>
-        <div class="stat-val-lg" id="s-velocity">+6 pts</div>
+        <div class="stat-val-lg" id="s-velocity" style="color:var(--text);">+6 pts</div>
         <div class="stat-delta" id="s-velocity-d">avg. across all roles</div>
       </div>
     </div>
@@ -660,7 +660,7 @@
           <div class="role-name">HR professionals</div>
           <div class="role-users">142 users</div>
         </div>
-        <div class="role-avatar" style="background:rgba(0,102,204,0.18);color:var(--blue);">HR</div>
+        <div class="role-avatar" style="background:rgba(0,85,179,0.12);color:var(--blue);">HR</div>
       </div>
       <div class="role-score" id="hr-score" style="color:var(--blue);">91%</div>
       <div class="role-bar-wrap">
@@ -677,7 +677,7 @@
           <div class="role-name">Leadership</div>
           <div class="role-users">88 users</div>
         </div>
-        <div class="role-avatar" style="background:rgba(127,119,221,0.18);color:var(--purple);">LD</div>
+        <div class="role-avatar" style="background:rgba(91,82,200,0.12);color:var(--purple);">LD</div>
       </div>
       <div class="role-score" id="ld-score" style="color:var(--purple);">68%</div>
       <div class="role-bar-wrap">
@@ -694,7 +694,7 @@
           <div class="role-name">Managers</div>
           <div class="role-users">610 users</div>
         </div>
-        <div class="role-avatar" style="background:rgba(29,158,117,0.18);color:var(--teal);">MG</div>
+        <div class="role-avatar" style="background:rgba(15,138,98,0.12);color:var(--teal);">MG</div>
       </div>
       <div class="role-score" id="mg-score" style="color:var(--teal);">77%</div>
       <div class="role-bar-wrap">
@@ -711,7 +711,7 @@
           <div class="role-name">Employees</div>
           <div class="role-users">3,980 users</div>
         </div>
-        <div class="role-avatar" style="background:rgba(239,159,39,0.18);color:var(--amber);">EM</div>
+        <div class="role-avatar" style="background:rgba(192,120,0,0.12);color:var(--amber);">EM</div>
       </div>
       <div class="role-score" id="em-score" style="color:var(--amber);">62%</div>
       <div class="role-bar-wrap">
@@ -801,7 +801,6 @@
 <script>
   const TOTAL_WEEKS = 14;
 
-  // Scores at each week (all 4 roles, blended = rough avg for display)
   const scoreData = {
     hr: [52,60,66,71,75,79,82,85,87,89,91,93,95,96],
     ld: [38,44,48,52,55,58,61,64,67,69,71,73,75,77],
@@ -830,23 +829,23 @@
 
   function getStatus(proj, target) {
     const gap = proj - target;
-    if (gap >= 0)  return { text:'On target',  bg:'rgba(29,158,117,0.15)',  border:'#1D9E75', color:'#1D9E75' };
-    if (gap >= -3) return { text:'On watch',   bg:'rgba(239,159,39,0.15)', border:'#EF9F27', color:'#EF9F27' };
-    return               { text:'At risk',    bg:'rgba(216,90,48,0.15)',  border:'#D85A30', color:'#D85A30' };
+    if (gap >= 0)  return { text:'On target',  bg:'rgba(15,138,98,0.12)',   border:'#0F8A62', color:'#0F8A62' };
+    if (gap >= -3) return { text:'On watch',   bg:'rgba(192,120,0,0.12)',   border:'#C07800', color:'#C07800' };
+    return               { text:'At risk',    bg:'rgba(192,65,15,0.12)',   border:'#C0410F', color:'#C0410F' };
   }
 
   function getGaugeColor(proj, target) {
     const gap = proj - target;
-    if (gap >= 0)  return '#1D9E75';
-    if (gap >= -3) return '#0066CC';
-    return '#D85A30';
+    if (gap >= 0)  return '#0F8A62';
+    if (gap >= -3) return '#0055B3';
+    return '#C0410F';
   }
 
   function getRoleGapText(score, target) {
     const diff = score - target;
-    if (diff >= 0)  return { text:`↑ ${diff} pts ahead`,  color:'#1D9E75' };
-    if (diff >= -5) return { text:`↓ ${Math.abs(diff)} pts to target`, color:'#EF9F27' };
-    return               { text:`↓ ${Math.abs(diff)} pts to target`, color:'#D85A30' };
+    if (diff >= 0)  return { text:`↑ ${diff} pts ahead`,  color:'#0F8A62' };
+    if (diff >= -5) return { text:`↓ ${Math.abs(diff)} pts to target`, color:'#C07800' };
+    return               { text:`↓ ${Math.abs(diff)} pts to target`, color:'#C0410F' };
   }
 
   function getInsight(proj, target, velocity, weeksLeft) {
@@ -952,7 +951,7 @@
     document.getElementById('proj-gap-chip').textContent     = gapText;
     document.getElementById('proj-gap-chip').style.color     = chipColor;
     document.getElementById('proj-gap-chip').style.borderColor = chipColor;
-    document.getElementById('proj-gap-chip').style.background = chipColor + '18';
+    document.getElementById('proj-gap-chip').style.background = chipColor + '1a';
     document.getElementById('proj-gauge-fill').style.width   = projScore + '%';
     document.getElementById('proj-gauge-fill').style.background = gaugeColor;
     document.getElementById('proj-target-line').style.left   = target + '%';
